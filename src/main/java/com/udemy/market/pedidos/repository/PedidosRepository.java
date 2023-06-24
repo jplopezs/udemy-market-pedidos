@@ -8,6 +8,6 @@ import com.udemy.market.pedidos.model.Pedido;
 
 public interface PedidosRepository extends JpaRepository<Pedido, Integer> {
 
-    List<Pedido> findById(int id);
+    List<Pedido> findByCliente(int id);
 
 }

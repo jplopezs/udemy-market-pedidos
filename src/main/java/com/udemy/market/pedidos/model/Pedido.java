@@ -3,6 +3,8 @@ package com.udemy.market.pedidos.model;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +26,7 @@ public class Pedido {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     int cliente;
+    @JsonFormat(pattern = "MMMM dd, yyyy")
     Date fecha;
     String estado;
     @OneToMany @JoinColumn(name = "pedido", referencedColumnName = "id")

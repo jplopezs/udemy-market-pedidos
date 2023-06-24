@@ -30,7 +30,7 @@ public class PedidosServiceImpl implements PedidosService {
     @Override
     public List<Pedido> pedidosByCliente(int clienteId) {
 
-        return pedidosRepository.findById(clienteId);
+        return pedidosRepository.findByCliente(clienteId);
 
     }
 
@@ -40,13 +40,13 @@ public class PedidosServiceImpl implements PedidosService {
         try {
             // Create Pedido object
             Pedido pedido = new Pedido(0, clienteId, new Date(), "Pendiente", null);
-            pedido = pedidosRepository.saveAndFlush(pedido); // Why save() is not available?
+            pedido = pedidosRepository.save(pedido);
             int pedidoId = pedido.getId();
         
             // Create each ProductoPedido
             productoPedido.forEach(item -> {
                 item.setPedido(pedidoId);
-                productoPedidoRepository.saveAndFlush(item);  // Why save() is not available?
+                productoPedidoRepository.save(item);
                 UriComponentsBuilder url = UriComponentsBuilder.fromHttpUrl(urlProductosAPI)
                 .queryParam("id", item.getProducto().getId())
                 .queryParam("unidades", item.getCantidad());
